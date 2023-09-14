@@ -57,17 +57,63 @@
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
 
-    .hand {
+    .hour-hand {
       width: 50%;
       height: 6px;
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .min-hand {
+      width: 50%;
+      height: 6px;
+      background: #bb1b1b;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .second-hand {
+      width: 50%;
+      height: 6px;
+      background: #0adede;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
   </style>
-
   <script>
+
+
+  setInterval(function(){
+    let now = new Date();
+    let hours = now.getHours();
+    let hour = document.querySelector(".hour-hand");
+    let hourDegree = ((hours/12) *360)+90;
+    let minutes = now.getMinutes();
+    let minute = document.querySelector(".min-hand");
+    let minDegree = ((minutes/60) *360)+90;
+    let seconds = now.getSeconds();
+    let second = document.querySelector(".second-hand");
+    let secondDegree = ((seconds/60) *360)+90;
+    hour.style.transform = `rotate(${hourDegree}deg)`;
+    minute.style.transform = `rotate(${minDegree}deg)`;
+    second.style.transform = `rotate(${secondDegree}deg)`;
+    console.log('hour :' + hours);
+    console.log('minutes :' + minutes);
+    console.log('seconds :' + seconds);
+  }, 1000);
+
 
 
   </script>
